@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: SpringBootConsulApplication
+  cloud:
+    consul:
+      config:
+        #        acl-token: ${CONSUL_ACL_TOKEN}
+        format: FILES
+        enabled: true
+        prefixes:
+          - ${spring.application.name}
+      host: ${CONSUL_HOST}

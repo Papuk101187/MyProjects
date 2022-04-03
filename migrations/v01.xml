@@ -1,0 +1,63 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+
+    <!-- СОЗДАЛИ ТАБЛИЦУ РОЛИ   -->
+    <changeSet author="oleg" id="v00-01">
+        <createTable tableName="roles">
+            <column name="id_roles" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="id_roles_pk"/>
+            </column>
+            <column name="roles_name" type="VARCHAR(255)" >
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+    <changeSet  author="oleg"  id="insert_v00-00">
+        <insert  catalogName="department"
+                 schemaName="public"
+                 tableName="roles">
+            <column name="id_roles" value="USR"/>
+            <column name="roles_name" value="Пользователь "/>
+        </insert>
+    </changeSet>
+
+
+
+    <!-- СОЗДАЛИ ТАБЛИЦУ ПОЛЬЗОВАТЕЛЕЙ   -->
+    <changeSet author="oleg" id="v01-01">
+        <createTable tableName="users">
+            <column name="id_users" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="users_pk"/>
+            </column>
+            <column name="user_login" type="VARCHAR(255)">
+            </column>
+            <column name="user_password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_type" type="VARCHAR(255)">
+            </column>
+            <column name="id_roles" type="VARCHAR(255)"><constraints foreignKeyName="id_roles_key" referencedTableName="roles" referencedColumnNames="id_roles"/> </column>
+        </createTable>
+    </changeSet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</databaseChangeLog>
