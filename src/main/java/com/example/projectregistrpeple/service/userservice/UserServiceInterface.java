@@ -11,7 +11,7 @@ public interface UserServiceInterface {
 
 
     void AddUser(ResponseUser responseUser);
-    Optional<Users> findByUsers(ResponseUser users);
+    Optional<Users> findByUsers(String users);
 
 
 

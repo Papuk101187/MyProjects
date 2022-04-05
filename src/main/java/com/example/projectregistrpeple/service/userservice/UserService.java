@@ -8,6 +8,7 @@ import com.example.projectregistrpeple.repository.userrepository.RepositoryInter
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,20 +20,21 @@ public class UserService implements UserServiceInterface {
 
     @Autowired
     RepositoryInterface repositoryInterface;
-
     @Autowired
     MainUserRepositoryInterfaceJPA repositoryInterfaceJPA;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     @Override
     public void AddUser(ResponseUser responseUser) {
 
         Role role = new Role();
-        role.setName("USR");
+        role.setId("USR");
 
         Users users = new Users()
                 .setLogin(responseUser.getLogin())
-                .setPassword(responseUser.getPassword())
+                .setPassword(passwordEncoder.encode(responseUser.getPassword()))
                 .setType(responseUser.getType())
                 .setRole(role);
 
@@ -40,9 +42,8 @@ public class UserService implements UserServiceInterface {
 
     }
 
-    public Optional<Users> findByUsers(ResponseUser users){
-        return repositoryInterfaceJPA.findByLogin(users.getLogin());
-
+    public Optional<Users> findByUsers(String login){
+        return repositoryInterfaceJPA.findByLogin(login);
     }
 
 

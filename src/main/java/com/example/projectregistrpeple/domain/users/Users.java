@@ -28,7 +28,6 @@ public class Users  {
     @Column(name = "user_type")
     public String type;
 
-
     @ManyToOne
     @JoinColumn(name = "id_roles")
     private Role role;
